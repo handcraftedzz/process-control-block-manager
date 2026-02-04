@@ -1,7 +1,7 @@
 /**
  * Assignment 1: priority queue of processes
  * @file readyqueue.h
- * @author ??? (TODO: your name)
+ * @author Andrew Mendez
  * @brief ReadyQueue is a queue of PCB's that are in the READY state to be scheduled to run.
  * It should be a priority queue such that the process with the highest priority can be selected next.
  * @version 0.1
@@ -61,5 +61,4 @@ public:
       * @brief Display the PCBs in the queue.
       */
 	void displayAll();
-
 };
