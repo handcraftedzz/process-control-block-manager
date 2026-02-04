@@ -38,7 +38,8 @@ public:
 	 * @param priority: the priority of the process in the range 1-50. Larger number represents higher priority
 	 * @param state the state of the process.
      */
-    PCB(unsigned int id = 0, unsigned int priority = 1, ProcState state = ProcState::NEW) {
+    PCB(unsigned int id = 0, unsigned int priority = 1, ProcState state = ProcState::NEW) 
+    {
         this->id = id;
         this->priority = priority;
         this->state = state;
@@ -48,14 +49,17 @@ public:
      * @brief Destroy the PCB object.
      *
      */
-    ~PCB() {}
+    ~PCB() 
+
+    {}
 
     /**
      * @brief Get the ID of the PCB.
      *
      * @return unsigned int: the ID of the PCB
      */
-    unsigned int getID() {
+    unsigned int getID() 
+    {
         return id;
     }
 
@@ -64,7 +68,8 @@ public:
      *
      * @return unsigned int: the priority of the PCB
      */
-    unsigned int getPriority() {
+    unsigned int getPriority() 
+    {
         return priority;
     }
 
@@ -73,7 +78,8 @@ public:
      *
      * @return ProcState: the state of the PCB
      */
-    ProcState getState() {
+    ProcState getState() 
+    {
         return state;
     }
 
@@ -81,27 +87,34 @@ public:
      * @brief Change the state of the PCB.
      * @param state
      */
-    void setState(ProcState state) {
-        // TODO: add your code here
+    void setState(ProcState state) 
+    {
+        this->state = state; // the private data member of the PCB class receives the parameter's value (state).
+        //updates the state of the pcb instance.
     }
 
     /**
      * @brief Change the priority of the PCB.
      * @param priority
      */
-    void setPriority(unsigned int priority) {
-        // TODO: add your code here
+    void setPriority(unsigned int priority) 
+    {
+        this->priority = priority;
+        //similar to setState, a private member field gets changed to the newer version. in this case, the number 1-50 
+        //gets updated.
     }
 
     /**
      * @brief Print the PCB.
      *
      */
-    void display() const {
+    void display() const 
+    {
         cout << "ID: " << id;
         cout << ", Priority: " << priority;
         cout << ", State: " ;
-        switch(state) {
+        switch(state) 
+        {
             case ProcState::NEW:
                 cout << "NEW";
                 break;
