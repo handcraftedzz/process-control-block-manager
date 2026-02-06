@@ -13,6 +13,8 @@ using namespace std;
  ReadyQueue::ReadyQueue()  
  {
      //TODO: add your code here
+    //the state needs to go from new to ready
+    
  }
 
 /**

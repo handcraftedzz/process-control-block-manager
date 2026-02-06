@@ -14,7 +14,8 @@
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[])
+{
     std::cout << "CS 433 Programming assignment 1" << std::endl;
     std::cout << "Course: CS433 (Operating Systems)" << std::endl;
     std::cout << "Description : Program to implement a priority ready queue of processes" << std::endl;
@@ -30,31 +31,38 @@ int main(int argc, char *argv[]) {
 
     // Create initial 500 PCBs with random priorities, add them to the PCB table
     // Randomly choose to add half of the processes into the ready queue
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size; i++) 
+    {
         int priority = rand() % 50 + 1;
         PCB *pcbPtr = new PCB(i + 1, priority);
         table.addPCB(pcbPtr, i);
         if (rand() % 2 == 0) q2.addPCB(pcbPtr);
     }
+
     cout << "Initial ReadyQueue size = " << q2.size() << endl;
     //q2.display();
     auto t1 = std::chrono::high_resolution_clock::now();
     int idx = 0;
     int remove_count = 0;
     int insert_count = 0;
-    for (int i = 0; i < 1000000; i++) {
+    for (int i = 0; i < 1000000; i++) 
+    {
         int x = rand();
-        if (x % 2 == 0) {
+        if (x % 2 == 0) 
+        {
             // Remove a proc from ReadyQueue
-            if (q2.size() > 0) {
+            if (q2.size() > 0) 
+            {
                 q2.removePCB();
                 remove_count ++;
             }
-        } else {
+        } 
+        else 
+        {
             // Add a PCB into ReadyQueue
             idx = rand() % size;
-            if (table.getPCB(idx)->getState() !=
-                ProcState::READY) { // if the PCB is not in READY state, add it into ReadyQueue
+            if (table.getPCB(idx)->getState() != ProcState::READY) 
+            { // if the PCB is not in READY state, add it into ReadyQueue
                 int priority = rand() % 50 + 1;  
                 table.getPCB(idx)->setPriority(priority);  // change its priority to a random value
                 q2.addPCB(table.getPCB(idx));
@@ -62,6 +70,7 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    
     auto t2 = std::chrono::high_resolution_clock::now();
     std::chrono::duration<double> runtime = std::chrono::duration_cast<std::chrono::duration<double>>(t2 - t1);
     std::cout << "Time taken: " << runtime.count() << " seconds" << std::endl;

@@ -13,7 +13,9 @@
 
 using namespace std;
 
-int main(int argc, char* argv[]) {
+
+int main(int argc, char* argv[]) 
+{
     std::cout << "CS 433 Programming assignment 1" << std::endl;
     std::cout << "Course: CS433 (Operating Systems)" << std::endl;
     std::cout << "Description : Program to implement a priority ready queue of processes" << std::endl;
@@ -23,7 +25,8 @@ int main(int argc, char* argv[]) {
     ReadyQueue q1;
     PCBTable table;
 
-    for (int i = 1; i <= 50; i++) {
+    for (int i = 1; i <= 50; i++) 
+    {
         // Add a new PCB with id = i, priority = i to the table at index i
         table.addNewPCB(i, i, i);
     }

@@ -15,7 +15,8 @@
  * @brief PCTable is an array of all PCB's in the system
  * 
  */
-class PCBTable {
+class PCBTable 
+{
 private:
     // TODO: add your private member variables here
     // choose a data structure for the PCBTable. 
@@ -49,7 +50,8 @@ public:
      * @param idx
      * @return PCB*
      */
-    PCB *operator[](unsigned int idx) {
+    PCB *operator[](unsigned int idx) 
+    {
         return getPCB(idx);
     }
 
@@ -67,7 +69,8 @@ public:
      * @param priority Priority of the new PCB
      * @param idx The index of the new PCB in the PCBTable
      */
-    void addNewPCB(unsigned int pid, unsigned int priority, unsigned int idx) {
+    void addNewPCB(unsigned int pid, unsigned int priority, unsigned int idx) 
+    {
         PCB *pcb = new PCB(pid, priority);
         addPCB(pcb, idx);
     }
