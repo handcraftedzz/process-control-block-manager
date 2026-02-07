@@ -14,8 +14,9 @@
  *
  * @param size: the capacity of the PCBTable
  */
-PCBTable::PCBTable(int size) //resize member funciton of the vector class to make room for the parameter's size
+PCBTable::PCBTable(int size) 
 {
+    //resize member funciton of the vector class to make room for the parameter's size
    this->pcbVec.resize(size);
 }
 
@@ -24,9 +25,7 @@ PCBTable::PCBTable(int size) //resize member funciton of the vector class to mak
  *
  */
 PCBTable::~PCBTable() 
-{
-   // TODO: add your code here
-   
+{   
   for (PCB* p : pcbVec) //automatic for lop, deletes pcb one by one until there's none left. 
   {
     delete p;//gone from heap
@@ -42,19 +41,13 @@ PCBTable::~PCBTable()
  */
 PCB* PCBTable::getPCB(unsigned int idx) 
 {
-   PCB* returning = nullptr; //var goes to the return data type
+   PCB* returning = nullptr; //var, returning, goes to the return data type
 
     if (idx >= pcbVec.size()) //check if the index will go out of bounds, if it does
     { 
         return nullptr;
     }
 
-    /*
-   if (pcbVec[idx] == nullptr) //if the pcb at this index empty, set the variable to nullptr
-   {
-      returning = nullptr;
-   }
-    */
    else //otherwise, good
    {
        returning = pcbVec[idx];
@@ -70,7 +63,6 @@ PCB* PCBTable::getPCB(unsigned int idx)
  */
 void PCBTable::addPCB(PCB *pcb, unsigned int idx) 
 {
-    // TODO: add your code here
     // Add a PCB pointer to the PCBTable at index idx.
 
     if (idx >= pcbVec.size())
@@ -78,18 +70,7 @@ void PCBTable::addPCB(PCB *pcb, unsigned int idx)
         return;
     }
 
-   // if (pcbVec[idx] != nullptr)
-    //{
-     // /  //delete pcbVec[idx];
-       // return;
-    //}
-
-    /*
-    else if (idx < pcbVec.size())
-    {
-        pcbVec[idx] = pcb;
-    }
-    */
+    
 
    pcbVec[idx] = pcb;
 }

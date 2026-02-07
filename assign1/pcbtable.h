@@ -20,8 +20,9 @@ class PCBTable
 {
 private:
     // choose a data structure for the PCBTable. 
+
     // You can use an array of PCB pointers, e.g. vector<PCB *>. 
-    vector<PCB *> pcbVec;
+    vector<PCB *> pcbVec; //vector chosen as they have a lot of member functions, 
 
 
 

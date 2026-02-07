@@ -19,7 +19,7 @@
 
 
     struct Node { //linked list
-        PCB* process = nullptr; //the process object points a PCB object. pointer.
+        PCB* process = nullptr; //the process object points to a nullptr
         Node* next = nullptr; //the next node
     };
 
@@ -28,15 +28,15 @@
 class ReadyQueue 
 {
 private:
-    // TODO: add your private member variables here
-    //an array of linked lists, size, count how many buckets are in the queue. for this bucket queue, which index in the queue holds the highest
-    //priority
+    //an array of linked lists,  counter is for how many pcbs are in a linked list. 
+    //for this bucket queue, which index in the queue holds the highest priority, = max.
 
 
-    int counter; //counts how many pcbs are in the queue
+
+    int counter; //counts how many pcbs are in the LL.
     int max;    //max = index highest priority in thre queue
 
-    Node* queue[50]; ///a queue of linked lists. the size of the array (50), (for 1-50 in priority) must me known at compilation time
+    Node* queue[50]; ///a queue of linked lists (bucket queue). the size of the array (50), (for 1-50 in priority) must be known at compilation time
     //(object code) because c++ is an explicit language. likes to know in advance. if i try a variable, a variable in [size] for queue is 
     //calculated at run time. (which happens after compilation time.)
 

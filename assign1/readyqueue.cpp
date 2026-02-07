@@ -12,16 +12,14 @@ using namespace std;
  */
  ReadyQueue::ReadyQueue()  
  {
-     //TODO: add your code here
      for (int j = 0; j < 50; j++)
      {
         queue[j] = nullptr;
      }
 
-     max = -1;//i set index with highest current priority because i don't want any function to maybe accidently think 
-     //there is a pcb that has a priority that it doesn't. especially in the beginning when working with memory.
-     counter = 0;
+     max = -1;  //intilaized my member fields here in the constructor, max to -1 since the queue is empty. -1 is temp.
 
+     counter = 0; //0 pcbs so far, 
  }
 
 /**
@@ -29,7 +27,6 @@ using namespace std;
 */
 ReadyQueue::~ReadyQueue() 
 {
-    //TODO: add your code to release dynamically allocate memory
     //manually delete each one at each index;
 
     for (int i = 49; i >= 0; i--)
@@ -46,7 +43,8 @@ ReadyQueue::~ReadyQueue()
 
     max = -1;
     counter = 0;    
-    //queue->next = NULL; //common safe c++ practice for linked lists. since my queue (array) was made up of a linked list.
+
+
 }
 
 /**
@@ -56,7 +54,6 @@ ReadyQueue::~ReadyQueue()
  */
 void ReadyQueue::addPCB(PCB *pcbPtr) 
 {
-    //TODO: add your code here
 
     pcbPtr->setState(ProcState::READY);
     int num = pcbPtr->priority - 1;
@@ -80,7 +77,6 @@ void ReadyQueue::addPCB(PCB *pcbPtr)
         max = num;
     }
     // When adding a PCB to the queue, you must change its state to READY.
-     //, wrong add the queue pcbPtr->setState(ProcState::READY); 
     //setting the parameter's state  (pcbPtr) to be ready. not NEW anymore. 
 }
 
@@ -91,12 +87,11 @@ void ReadyQueue::addPCB(PCB *pcbPtr)
  */
 PCB* ReadyQueue::removePCB() 
 {
-    //TODO: add your code here
     // When removing a PCB from the queue, you must change its state to RUNNING.
 
     PCB* returning = nullptr;
 
-    if (this->counter == 0 || this->max == -1) //if the counter is 0, that means there are 0 linked lists in the queue.
+    if (this->counter == 0 || this->max == -1) //if the counter is 0, that means there are 0 pcbs in the queue
     ///if the max priority is -1, that means there is no pcb with a priority. 
     {
         return nullptr;
@@ -140,7 +135,6 @@ PCB* ReadyQueue::removePCB()
  */
 int ReadyQueue::size() 
 {
-    //TODO: add your code here
     //private data member counter in header says counter has the number of pcbs saved
 
     
