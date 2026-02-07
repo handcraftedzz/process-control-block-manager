@@ -57,10 +57,26 @@ ReadyQueue::~ReadyQueue()
 void ReadyQueue::addPCB(PCB *pcbPtr) 
 {
     //TODO: add your code here
+
+    pcbPtr->setState(ProcState::READY);
+    int num = pcbPtr->priority - 1;
+
+
+    Node *addHead = new Node;
+    addHead->process = pcbPtr;
+    addHead->next = queue[num];
+ 
+    queue[num] = addHead;
+
+
+    counter++;
+    if (num > max)
+    {
+        max = num;
+    }
     // When adding a PCB to the queue, you must change its state to READY.
      //, wrong add the queue pcbPtr->setState(ProcState::READY); 
     //setting the parameter's state  (pcbPtr) to be ready. not NEW anymore. 
-
 }
 
 /**
@@ -73,10 +89,43 @@ PCB* ReadyQueue::removePCB()
     //TODO: add your code here
     // When removing a PCB from the queue, you must change its state to RUNNING.
 
-    //you will remove the PCB from the readyqueue. by seeing  which one pcb from the readyQueue has the highest priority. (1-50).
+    PCB* returning;
 
+    if (this->counter == 0 || this->max == -1) //if the counter is 0, that means there are 0 linked lists in the queue.
+    ///if the max priority is -1, that means there is no pcb with a priority. 
+    {
+        return nullptr;
+    }
+    else
+    {
 
-    
+        while (max >= 0 && queue[max] == nullptr)
+        {
+            max--;
+        }
+
+        if (this->max < 0)
+        {
+            return nullptr;
+        }
+
+        Node* head = queue[max];
+        returning = head->process;
+
+        queue[max] = head->next;
+        delete head;
+
+        returning->setState(ProcState::RUNNING);
+        counter--;
+
+        //now time for the max to get updated if the head of the linked list got removed
+         while (max >= 0 && queue[max] == nullptr)
+         {
+            max--;
+         }
+    }
+
+    return returning;
 }
 
 /**
@@ -87,18 +136,10 @@ PCB* ReadyQueue::removePCB()
 int ReadyQueue::size() 
 {
     //TODO: add your code here
+    //private data member counter in header says counter has the number of pcbs saved
 
-    /*
-    //int sum = 0;
     
-    while(queue->next != NULL)
-    {
-        sum++;
-        queue->next = queue->next->next;
-    }
-    */
-
-    return 1;
+    return this->counter;
 }
 
 /**
@@ -106,16 +147,16 @@ int ReadyQueue::size()
  */
 void ReadyQueue::displayAll() 
 {
-    //TODO: add your code here
-
-    /*
-    //queue->process->display();
-    while(queue->next != NULL)
+    for (int i = max; i >= 0; i--)
     {
-        queue->process->display();
-        queue->next = queue->next->next;
+        Node* head = queue[i];
+        while (head != nullptr)
+        {
+            head->process->display();
+            head = head->next;
+        }
     }
-    //queue->process->display();
-    */
+
+    
 
 }

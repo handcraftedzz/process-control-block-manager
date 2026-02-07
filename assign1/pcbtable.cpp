@@ -14,9 +14,9 @@
  *
  * @param size: the capacity of the PCBTable
  */
-PCBTable::PCBTable(int size) 
+PCBTable::PCBTable(int size) //reserve member funciton of the vector class alllocates memory for the parameter (size) for all the PCBs 
 {
-   // TODO: add your code here
+   this->pcbVec.reserve(size);
 }
 
 /**
@@ -26,7 +26,13 @@ PCBTable::PCBTable(int size)
 PCBTable::~PCBTable() 
 {
    // TODO: add your code here
-   // Delete all the PCBs in the table
+   
+  for (PCB* p : pcbVec) //automatic for lop, deletes pcb one by one until there's none left. 
+  {
+    delete p;//gone from heap
+  }
+
+
 }
 
 /**
@@ -38,7 +44,8 @@ PCBTable::~PCBTable()
 PCB* PCBTable::getPCB(unsigned int idx) 
 {
     // TODO: add your code here
-    return NULL;
+   
+    
 }
 
 /**
