@@ -12,7 +12,8 @@ using namespace std;
  */
  ReadyQueue::ReadyQueue()  
  {
-     for (int j = 0; j < 50; j++)
+     for (int j = 0; j < 50; j++) //every single head of the linked list (bucket ) needs to get set to nullptr before it can go to their ready and running
+     //states
      {
         queue[j] = nullptr;
      }
@@ -31,12 +32,13 @@ ReadyQueue::~ReadyQueue()
 
     for (int i = 49; i >= 0; i--)
     {
-        Node* head = queue[i];
-        while (head != nullptr)
+        Node* head = queue[i]; //traversal is needed in c++ when working with LINKED lists. the readyqueue class doesn't own the pcb class
+        //so accesing the pcbs via the linked list nodes is how it's done.
+        while (head != nullptr) //while loop keeps on going until head points to nothing in heap.
         {
-            Node* nextNode = head->next;
-            delete head;
-            head = nextNode;
+            Node* nextNode = head->next; //nextNode is a node object that points to the memory address of the next head.
+            delete head; //delete in order to free up memory that was dyncamilly allocated in headp.
+            head = nextNode; //update the head now, 
         }
         queue[i] = nullptr;
     }
@@ -55,7 +57,7 @@ ReadyQueue::~ReadyQueue()
 void ReadyQueue::addPCB(PCB *pcbPtr) 
 {
 
-    pcbPtr->setState(ProcState::READY);
+    pcbPtr->setState(ProcState::READY); //setting state now via member function
     int num = pcbPtr->priority - 1;
 
     if (num < 0 || num >= 50) //in case the index is out of bounds, u only acccess valid indices for the array of nodes
@@ -65,10 +67,10 @@ void ReadyQueue::addPCB(PCB *pcbPtr)
 
 
     Node *addHead = new Node;
-    addHead->process = pcbPtr;
-    addHead->next = queue[num];
+    addHead->process = pcbPtr; //have addhead proces point to the the memory address of pcb ptr.
+    addHead->next = queue[num]; //make sure this next is updated before this step is forgotten
  
-    queue[num] = addHead;
+    queue[num] = addHead; //now the index has the head's memmory address (node(s))
 
 
     counter++;
@@ -89,7 +91,7 @@ PCB* ReadyQueue::removePCB()
 {
     // When removing a PCB from the queue, you must change its state to RUNNING.
 
-    PCB* returning = nullptr;
+    PCB* returning = nullptr; //initiliazed to nullptr, the pcb pointer
 
     if (this->counter == 0 || this->max == -1) //if the counter is 0, that means there are 0 pcbs in the queue
     ///if the max priority is -1, that means there is no pcb with a priority. 
@@ -99,7 +101,7 @@ PCB* ReadyQueue::removePCB()
     else
     {
 
-        while (max >= 0 && queue[max] == nullptr)
+        while (max >= 0 && queue[max] == nullptr) //while you don't come across an already filled node., keep looking . 
         {
             max--;
         }
@@ -110,7 +112,7 @@ PCB* ReadyQueue::removePCB()
         }
 
         Node* head = queue[max];
-        returning = head->process;
+        returning = head->process; //similar to previous function
 
         queue[max] = head->next;
         delete head;
@@ -148,11 +150,11 @@ void ReadyQueue::displayAll()
 {
     for (int i = max; i >= 0; i--)
     {
-        Node* head = queue[i];
+        Node* head = queue[i]; //start from the hgihest priority and go down to the lower ones.
         while (head != nullptr)
         {
-            head->process->display();
-            head = head->next;
+            head->process->display(); //use the display function to display all more smoothyl.
+            head = head->next; //same as updating the index, but for nodes
         }
     }
 

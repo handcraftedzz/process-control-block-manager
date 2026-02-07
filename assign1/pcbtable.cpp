@@ -17,7 +17,7 @@
 PCBTable::PCBTable(int size) 
 {
     //resize member funciton of the vector class to make room for the parameter's size
-   this->pcbVec.resize(size);
+   this->pcbVec.resize(size); //use pre built vector function
 }
 
 /**
@@ -50,10 +50,10 @@ PCB* PCBTable::getPCB(unsigned int idx)
 
    else //otherwise, good
    {
-       returning = pcbVec[idx];
+       returning = pcbVec[idx]; //main important line for this function, the pcb's address goes the pcb pointer's address just made.
    }
 
-    return returning;
+    return returning; //return this variab;e 
 }
 
 /**
