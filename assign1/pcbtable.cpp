@@ -1,7 +1,7 @@
 /**
  * Assignment 1: priority queue of processes
  * @file pcbtable.h
- * @author ??? (TODO: your name)
+ * @author Andrew M
  * @brief This is the implementation file for the PCBTable class.
  * //You must complete the all parts marked as "TODO". Delete "TODO" after you are done.
  * // Remember to add sufficient comments to your code
@@ -14,9 +14,9 @@
  *
  * @param size: the capacity of the PCBTable
  */
-PCBTable::PCBTable(int size) //reserve member funciton of the vector class alllocates memory for the parameter (size) for all the PCBs 
+PCBTable::PCBTable(int size) //resize member funciton of the vector class to make room for the parameter's size
 {
-   this->pcbVec.reserve(size);
+   this->pcbVec.resize(size);
 }
 
 /**
@@ -32,7 +32,6 @@ PCBTable::~PCBTable()
     delete p;//gone from heap
   }
 
-
 }
 
 /**
@@ -43,9 +42,25 @@ PCBTable::~PCBTable()
  */
 PCB* PCBTable::getPCB(unsigned int idx) 
 {
-    // TODO: add your code here
-   
-    
+   PCB* returning = nullptr; //var goes to the return data type
+
+    if (idx >= pcbVec.size()) //check if the index will go out of bounds, if it does
+    { 
+        return nullptr;
+    }
+
+    /*
+   if (pcbVec[idx] == nullptr) //if the pcb at this index empty, set the variable to nullptr
+   {
+      returning = nullptr;
+   }
+    */
+   else //otherwise, good
+   {
+       returning = pcbVec[idx];
+   }
+
+    return returning;
 }
 
 /**
@@ -57,4 +72,24 @@ void PCBTable::addPCB(PCB *pcb, unsigned int idx)
 {
     // TODO: add your code here
     // Add a PCB pointer to the PCBTable at index idx.
+
+    if (idx >= pcbVec.size())
+    {
+        return;
+    }
+
+   // if (pcbVec[idx] != nullptr)
+    //{
+     // /  //delete pcbVec[idx];
+       // return;
+    //}
+
+    /*
+    else if (idx < pcbVec.size())
+    {
+        pcbVec[idx] = pcb;
+    }
+    */
+
+   pcbVec[idx] = pcb;
 }

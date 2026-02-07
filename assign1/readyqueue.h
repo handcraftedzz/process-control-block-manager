@@ -36,7 +36,7 @@ private:
     int counter; //counts how many pcbs are in the queue
     int max;    //max = index highest priority in thre queue
 
-    Node* queue[50]; //a queue of linked lists. the size of the array (50), (for 1-50 in priority) must me known at compilation time
+    Node* queue[50]; ///a queue of linked lists. the size of the array (50), (for 1-50 in priority) must me known at compilation time
     //(object code) because c++ is an explicit language. likes to know in advance. if i try a variable, a variable in [size] for queue is 
     //calculated at run time. (which happens after compilation time.)
 

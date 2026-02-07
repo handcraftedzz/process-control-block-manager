@@ -61,6 +61,11 @@ void ReadyQueue::addPCB(PCB *pcbPtr)
     pcbPtr->setState(ProcState::READY);
     int num = pcbPtr->priority - 1;
 
+    if (num < 0 || num >= 50) //in case the index is out of bounds, u only acccess valid indices for the array of nodes
+    {
+        return;
+    }
+
 
     Node *addHead = new Node;
     addHead->process = pcbPtr;
@@ -89,7 +94,7 @@ PCB* ReadyQueue::removePCB()
     //TODO: add your code here
     // When removing a PCB from the queue, you must change its state to RUNNING.
 
-    PCB* returning;
+    PCB* returning = nullptr;
 
     if (this->counter == 0 || this->max == -1) //if the counter is 0, that means there are 0 linked lists in the queue.
     ///if the max priority is -1, that means there is no pcb with a priority. 
@@ -157,6 +162,5 @@ void ReadyQueue::displayAll()
         }
     }
 
-    
 
 }
