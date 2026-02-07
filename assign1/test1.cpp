@@ -61,6 +61,7 @@ int main(int argc, char* argv[])
     q1.addPCB(table.getPCB(19));
     q1.displayAll();
     std::cout << "One by one remove the process with the highest priority from the queue q1" << std::endl;
+    //
     while(q1.size() > 0)
     {
         p = q1.removePCB();
